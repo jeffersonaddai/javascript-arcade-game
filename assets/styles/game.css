@@ -1,0 +1,11 @@
+#gameCanvas{
+    width: "800";
+    height: "600";
+    position: relative;
+}
+input{
+    position:absolute;
+    left:100px;
+    top:300px;
+    width:600px;
+}
