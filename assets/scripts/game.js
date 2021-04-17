@@ -175,9 +175,10 @@ function drawEverything() {
 
 	// next line draws the ball
 	colorCircle(ballX, ballY, 10, 'white');
-
-	canvasContext.fillText(player1Score, 100, 100);
-	canvasContext.fillText(player2Score, canvas.width-100, 100);
+	canvasContext.fillStyle = '#56a5eb';
+	canvasContext.fillText(`player1 ${player1Score}`, 100, 100);
+	canvasContext.fillStyle = '#eb5656';
+	canvasContext.fillText(`player2 ${player2Score}`, canvas.width-100, 100);
 }
 
 function colorCircle(centerX, centerY, radius, drawColor) {
