@@ -5,9 +5,12 @@ canvasContext = canvas.getContext('2d');
 colorRect(0,0,canvas.width,canvas.height,'black');
 
 play.addEventListener('click', ()=>{
-    localStorage.clear();
-    localStorage.setItem('winningScore', endingScoreInput.value);
-    window.location.assign('game.html');
+    if(endingScoreInput.value > 0){
+        localStorage.clear();
+        localStorage.setItem('winningScore', endingScoreInput.value);
+        window.location.assign('game.html');
+    }else alert("winning score cannot be less than 1")
+
 })
 function colorRect(leftX,topY, width,height, drawColor) {
 	canvasContext.fillStyle = drawColor;
