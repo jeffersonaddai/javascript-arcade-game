@@ -7,8 +7,12 @@ var ballSpeedY = 4;
 
 var player1Score = 0;
 var player2Score = 0;
-const WINNING_SCORE = parseInt(localStorage.getItem('winningScore'));
+var player1ScorePercent = 0;
+var player2ScorePercent = 0;
 
+const WINNING_SCORE = parseInt(localStorage.getItem('winningScore'));
+const player1ProgressBarFull = document.getElementById('player1ProgressBarFull');
+const player2ProgressBarFull = document.getElementById('player2ProgressBarFull');
 var showingWinScreen = false;
 
 var paddle1Y = 250;
@@ -35,6 +39,7 @@ function handleMouseClick(evt) {
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
+
 
 	var framesPerSecond = 30;
 	setInterval(function() {
@@ -92,7 +97,18 @@ function moveEverything() {
 					-(paddle1Y+PADDLE_HEIGHT/2);
 			ballSpeedY = deltaY * 0.35;
 		} else {
+
 			player2Score++; // must be BEFORE ballReset()
+			player2ScorePercent += (1/WINNING_SCORE) * 100;
+			if((player1ScorePercent + player2ScorePercent) > 100) {
+				player1ScorePercent -= (1/WINNING_SCORE)*100;
+				player1ProgressBarFull.style.width = `${player1ScorePercent}%`;
+
+			}
+			
+			player2ProgressBarFull.style.width = `${player2ScorePercent}%`;
+
+
 			ballReset();
 		}
 	}
@@ -105,7 +121,16 @@ function moveEverything() {
 					-(paddle2Y+PADDLE_HEIGHT/2);
 			ballSpeedY = deltaY * 0.35;
 		} else {
+			
 			player1Score++; // must be BEFORE ballReset()
+			player1ScorePercent += (1/WINNING_SCORE) * 100;
+			if((player1ScorePercent + player2ScorePercent) > 100) {
+				player2ScorePercent -= (1/WINNING_SCORE)*100;
+				player2ProgressBarFull.style.width = `${player2ScorePercent}%`;
+			}
+			
+			player1ProgressBarFull.style.width = `${player1ScorePercent}%`;
+
 			ballReset();	
 		}
 	}
